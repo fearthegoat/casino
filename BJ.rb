@@ -1,4 +1,3 @@
-## Last edited by Travis Tucker - 8/2/15 @ 10:30pm
 ## To Do list
 ## [] Multiple decks
 ## [] Basic Strategy
