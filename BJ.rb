@@ -106,12 +106,15 @@ class Card_Player
 	attr_accessor :cash
 	attr_accessor :current_bet
   attr_accessor :cards
+  attr_accessor :hands
   attr_accessor :name
 
 	def initialize(name = "monkey", money = 500)
 		@name = name
     @cash = money
-    @cards = StackOfCards.new
+    @hands = []
+    @initial_hand = StackOfCards.new
+    @hands << @initial_hand
 	end
 
 	def bet(bet_amount)
@@ -191,7 +194,7 @@ end
 @deck.deal_off_top_to(@dealer, 1)
 
 PLAYERS.each do |person|
-  @deck.deal_off_top_to(person.cards, 2)
+  @deck.deal_off_top_to(person.hands.first, 2)
 end
 
 print "dealer: "
@@ -199,8 +202,8 @@ puts "#{(@dealer).to_s}"
 
 PLAYERS.each do |person|
   print "#{person.name}: "
-  print "#{person.cards.to_s}"
-  puts "#{person.name}'s total value: #{person.cards.total_value} "
+  print "#{person.hands.first.to_s}"
+  puts "#{person.name}'s total value: #{person.hands.first.total_value} "
   puts ""
 end
 
@@ -224,9 +227,9 @@ puts "dealer total_value: #{@dealer.total_value}"
 puts ""
 
 PLAYERS.each do |person|
-  print person.name, ": "
+  print "#{person.name}: "
   print "#{person.cards.to_s}"
-  print person.name, " total value: ", person.cards.total_value, "\n\n"
+  puts "#{person.name} total value: #{person.cards.total_value}"
 end
 
 ## Code to determine who wins
@@ -254,5 +257,5 @@ end
 puts "Current stacks:"
 
 PLAYERS.each do |person|
-  print person.name, ": ", person.cash, "\n"
+  puts "#{person.name}: $#{person.cash}"
 end
